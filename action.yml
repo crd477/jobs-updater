@@ -45,7 +45,7 @@ inputs:
     required: false
 
 # If you want to post to Mastodon, these values are required
-  mastdodon_deploy:
+  mastodon_deploy:
     description: Boolean to deploy to Mastodon
     required: false
   mastodon_access_token:

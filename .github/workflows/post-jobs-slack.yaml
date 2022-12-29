@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Run Jobs Slack Poster
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 2
 
@@ -22,7 +22,7 @@ jobs:
           unique: "url"
 
           deploy: false
-          test: false
+          test: true
 
           # Also deploy to Mastodon (all secrets required in repository secrets)
           mastodon_deploy: true

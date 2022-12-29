@@ -27,6 +27,21 @@ def write_file(content, filename):
     with open(filename, "w") as fd:
         fd.write(content)
 
+def set_env_and_output(name, value):
+    """
+    helper function to echo a key/value pair to the environement file
+
+    Parameters:
+    name (str)  : the name of the environment variable
+    value (str) : the value to write to file
+    """
+    for env_var in ("GITHUB_ENV", "GITHUB_OUTPUT"):
+        environment_file_path = os.environ.get(env_var)
+        print("Writing %s=%s to %s" % (name, value, env_var))
+
+        with open(environment_file_path, "a") as environment_file:
+            environment_file.write("%s=%s\n" % (name, value))
+
 
 def get_parser():
     parser = argparse.ArgumentParser(description="Job Updater")
@@ -286,9 +301,9 @@ def main():
                 % (response.reason, response.status_code)
             )
 
-    print("::set-output name=fields::%s" % json.dumps(keys))
-    print("::set-output name=matrix::%s" % json.dumps(matrix))
-    print("::set-output name=empty_matrix::false")
+    set_env_and_output("fields", json.dumps(keys))
+    set_env_and_output("matrix", json.dumps(matrix))
+    set_env_and_output("empty_matrix", "false")
     print("matrix: %s" % json.dumps(matrix))
     print("group: %s" % new)
 
