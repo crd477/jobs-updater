@@ -222,9 +222,9 @@ def main():
         new = entries
     elif not new:
         print("No new jobs found.")
-        print("::set-output name=fields::[]")
-        print("::set-output name=empty_matrix::true")
-        print("::set-output name=matrix::[]")
+        set_env_and_output("fields", "[]")
+        set_env_and_output("matrix", "[]")
+        set_env_and_output("empty_matrix", "true")
         sys.exit(0)
 
     # Prepare the data
